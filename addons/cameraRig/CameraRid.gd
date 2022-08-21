@@ -8,7 +8,7 @@ var mouse_sensitivity_tilt = 0.5
 var velocity = Vector3()
 var direction = Vector3()
 
-const FLY_SPEED = 50
+const FLY_SPEED = 10
 const FLY_ACCEL = 1
 
 var gravity = -9.8

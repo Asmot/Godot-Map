@@ -2,7 +2,7 @@
 
 [resource]
 code = "shader_type spatial;
-render_mode unshaded, diffuse_toon, specular_toon;
+render_mode diffuse_toon;
 
 // height offset 
 // height scale
@@ -36,7 +36,6 @@ void vertex() {
 void fragment() {
 	ALBEDO = texture(groundTexture, UV).xyz;
 	NORMAL = texture(normalMapTexture, vertex_position).xyz;
-	
 	
 }
 "

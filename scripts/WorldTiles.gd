@@ -6,6 +6,7 @@ var TileNode = preload("res://assets/Tile.tscn")
 # center latlng
 export var latlng = Vector2(32.6141, 114.34411);
 export var zoom = 13
+export var use_online_data = false
 
 # center mercator pos and tilecoord
 var centerWorldPos;
@@ -19,11 +20,15 @@ const TILE_COUNT_EACH_SIDE = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	currentTileCoords = cal_current_tiles();
-	
-	print (currentTileCoords)
-	
-	check_and_add_tiles();
+	# remove test
+	if use_online_data:
+		for tile in get_children():
+			remove_child(tile);
+		currentTileCoords = cal_current_tiles();
+		
+		print (currentTileCoords)
+		
+		check_and_add_tiles();
 	
 
 func check_and_add_tiles():
@@ -36,6 +41,7 @@ func check_and_add_tiles():
 		tile.tile_coord = tileCoord;
 		tile.translation = Vector3(o_x, 0, o_y);
 		
+		tile.loadTile()
 		add_child(tile)
 
 

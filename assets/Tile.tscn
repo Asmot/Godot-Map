@@ -10,7 +10,6 @@
 albedo_texture = ExtResource( 2 )
 
 [node name="Tile" type="Spatial"]
-transform = Transform( 256, 0, 0, 0, 256, 0, 0, 0, 256, 0, 0, 0 )
 script = ExtResource( 3 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]

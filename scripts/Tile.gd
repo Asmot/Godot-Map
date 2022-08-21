@@ -21,7 +21,6 @@ func format_height_url():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$TerrainTile/MeshInstance.material_override = TerrainMaterial
-	loadTile()
 	
 	# for test
 #	var image = Image.new()

@@ -6,13 +6,17 @@
 
 [node name="Spatial" type="Spatial"]
 
-[node name="WorldTiles" type="Node" parent="."]
+[node name="WorldTiles" type="Spatial" parent="."]
+transform = Transform( 32, 0, 0, 0, 32, 0, 0, 0, 32, 0, 0, 0 )
 script = ExtResource( 2 )
 
+[node name="TestTile" parent="WorldTiles" instance=ExtResource( 3 )]
+
 [node name="CameraRid" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 52.1195, 65.5903 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20.6773, 8.11515, 0 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( -0.748166, 0.15144, -0.645998, -0.653882, -0.333552, 0.679103, -0.112631, 0.930489, 0.348576, 0, 77.2798, 0 )
-
-[node name="Tile" parent="." instance=ExtResource( 3 )]
+transform = Transform( 0.852244, -0.339548, 0.39798, 0.0864429, 0.841689, 0.532999, -0.515954, -0.419842, 0.746675, 0, 6.89898, 0 )
+light_color = Color( 0.92549, 0.603922, 0.0470588, 1 )
+shadow_enabled = true
+shadow_color = Color( 0.168627, 0.160784, 0.160784, 1 )
