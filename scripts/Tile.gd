@@ -16,6 +16,7 @@ func loadTile():
 	$TileLoad.request(url)
 	print ("request %s" %(url))
 
+#tile downloaded
 func _on_TileLoad_request_completed(result, response_code, headers, body):
 	print ("laod complete size %s" %(str(len(body))))
 	var image = Image.new()
