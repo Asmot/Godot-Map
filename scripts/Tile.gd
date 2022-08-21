@@ -8,13 +8,16 @@ func format_url():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	loadTile()
+	$MeshInstance.material_override = SpatialMaterial.new()
+
+func loadTile():
 	var url = format_url()
 	$TileLoad.request(url)
 	print ("request %s" %(url))
 
-
 func _on_TileLoad_request_completed(result, response_code, headers, body):
-	print ("laod complete")
+	print ("laod complete size %s" %(str(len(body))))
 	var image = Image.new()
 	var error = image.load_png_from_buffer(body)
 	if error != OK:
@@ -23,8 +26,8 @@ func _on_TileLoad_request_completed(result, response_code, headers, body):
 
 	var texture = ImageTexture.new()
 	texture.create_from_image(image)
-	$MeshInstance.get_active_material(0).albedo_texture = texture
 	
-	print ("laod complete and set texture to BGImage")
+	$MeshInstance.material_override.albedo_texture = texture
+	print ("laod complete and set texture success", $MeshInstance.material_override, texture)
 
 

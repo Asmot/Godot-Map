@@ -14,18 +14,29 @@ var mercatorTool = Mercator.new()
 
 var currentTileCoords = [];
 
+# TOTAL tile count each side
+const TILE_COUNT_EACH_SIDE = 2
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	currentTileCoords = cal_current_tiles();
 	
 	print (currentTileCoords)
 	
-	var tile = TileNode.instance()
-	tile.tile_coord = centerWorldTileCoord;
+	check_and_add_tiles();
 	
-	add_child(tile)
-	
-	
+
+func check_and_add_tiles():
+	for tileCoord in currentTileCoords:
+		
+		var tile = TileNode.instance()
+		
+		var o_x = (tileCoord.x - centerWorldTileCoord.x) * tile.scale.x / 2;
+		var o_y = (tileCoord.y - centerWorldTileCoord.y) * tile.scale.z / 2;
+		tile.tile_coord = tileCoord;
+		tile.translation = Vector3(o_x, 0, o_y);
+		
+		add_child(tile)
 
 
 func cal_current_tiles():
@@ -34,9 +45,9 @@ func cal_current_tiles():
 	centerWorldTileCoord = mercatorTool.webMercator2TileCoord(centerWorldPos, zoom);
 	print ("center tilecoord:")
 	print (centerWorldTileCoord)
-	
-	for i in range(2):
-		for j in range(2):
+
+	for i in range(TILE_COUNT_EACH_SIDE):
+		for j in range(TILE_COUNT_EACH_SIDE):
 			var offset = Vector3(i - 1, j - 1, 0);
 			tileCoords.append(centerWorldTileCoord + offset);
 	
