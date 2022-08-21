@@ -1,0 +1,42 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type spatial;
+render_mode unshaded, diffuse_toon, specular_toon;
+
+// height offset 
+// height scale
+uniform float height_offset = 6100.;
+uniform float height_scale = 0.001;
+
+uniform sampler2D groundTexture;
+uniform sampler2D heightTexture;
+uniform vec2 heightTextureSize = vec2(256.,256.);
+uniform sampler2D normalMapTexture;
+
+const float TERRAIN_TILE_SIZE = 256.0;
+
+float getHeight(vec2 pos) {
+	vec3 rgb = texture(heightTexture, pos).xyz;
+	float R = rgb.r * TERRAIN_TILE_SIZE;
+	float G = rgb.g * TERRAIN_TILE_SIZE;
+	float B = rgb.b * TERRAIN_TILE_SIZE;
+	// -10000 + ((R * 256 * 256 + G * 256 + B) * 0.1)
+	return -10000.0 + ((R * TERRAIN_TILE_SIZE * TERRAIN_TILE_SIZE + G * TERRAIN_TILE_SIZE + B) * 0.1);
+}
+varying vec2 vertex_position;
+
+void vertex() {
+	vertex_position = VERTEX.xz / 2.0;
+	VERTEX.y = getHeight(UV);
+	VERTEX.y += height_offset;
+	VERTEX.y *= height_scale;
+}
+
+void fragment() {
+	ALBEDO = texture(groundTexture, UV).xyz;
+	NORMAL = texture(normalMapTexture, vertex_position).xyz;
+	
+	
+}
+"

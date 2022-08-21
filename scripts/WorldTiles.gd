@@ -4,8 +4,8 @@ var Mercator = preload("res://scripts/proj/Mercator.gd")
 var TileNode = preload("res://assets/Tile.tscn")
 
 # center latlng
-export var latlng = Vector2(39, 116);
-export var zoom = 10;
+export var latlng = Vector2(32.6141, 114.34411);
+export var zoom = 13
 
 # center mercator pos and tilecoord
 var centerWorldPos;
@@ -15,7 +15,7 @@ var mercatorTool = Mercator.new()
 var currentTileCoords = [];
 
 # TOTAL tile count each side
-const TILE_COUNT_EACH_SIDE = 2
+const TILE_COUNT_EACH_SIDE = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
